@@ -1,9 +1,8 @@
 import java.util.Scanner;
 import java.util.ArrayList;
-
 public class customer {
 	// ================================
-	// FIELDS (customer information)
+	// FIELDS 
 	// ================================
 	private static String customerId;
 	private static String password;
@@ -12,11 +11,8 @@ public class customer {
 	private static String creditCard;
 	private static String securityAnswer;
 	private static String securityQuestion;
-	
 	// ================================
 	// OBJECTS
-	// Parallel ArrayLists: each index i corresponds
-	// to the same customer's information.
 	// ================================
 	static ArrayList<String> customerIds = new ArrayList<>(); 
 	static ArrayList<String> passwords = new ArrayList<>(); 
@@ -26,11 +22,8 @@ public class customer {
 	static ArrayList<String> securityAnswers = new ArrayList<>();
 	static ArrayList<String> securityQuestions = new ArrayList<>();
 	static Scanner input = new Scanner(System.in); 
-	
 	// ================================
 	// CONSTRUCTOR
-	// (not really used since all fields are static,
-	// but defined anyway)
 	// ================================
 	public customer(String customerId, String password, String name, String address, String creditCard) {
 		this.customerId = customerId;
@@ -54,10 +47,6 @@ public class customer {
 	
 	// ================================
 	// LOGIN METHOD
-	// Main sequence: 
-	// 1. Prompt for ID
-	// 2. Prompt for password (3 attempts allowed)
-	// 3. Show security question, check answer
 	// ================================
 	public static void logOn(String customerId, String password) {
 		int attempts = 0;
@@ -109,20 +98,22 @@ public class customer {
 	}
 
 	// ================================
-	// LOG OUT (placeholder)
+	// LOG OUT 
 	// ================================
 	public static void logOut(String customerId) {
-		// Currently empty
+			customerIds.clear();
+			names.clear();
+			passwords.clear();
+			addresses.clear();
+			creditCards.clear();
+			securityAnswers.clear();
+			securityQuestions.clear();
+			
+			System.out.print("Successfly logged out");
 	}
 	
 	// ================================
 	// CREATE ACCOUNT
-	// Alternative sequence loops until valid:
-	// - unique ID
-	// - valid password
-	// - non-empty name/address/credit card
-	// - valid security question & answer
-	// On success: adds info to all ArrayLists
 	// ================================
 	public static void createAccount(String customerId, String password, String name, String address, String creditCard, String securityAnswer, String securityQuestion) {
 		int securityQuestionSelection;
@@ -223,15 +214,28 @@ public class customer {
 	}
 
 	// ================================
-	// STUB METHODS (placeholders)
+	// Select Items
 	// ================================
-	public static void selectItems() {}
-	public static void viewOrder() {}
-	public static void makeOrder() {}
+	public static void selectItems() {
+		
+	}
+	
+	// ================================
+	// View Order
+	// ================================
+	public static void viewOrder() {
+		
+	}
+	
+	// ================================
+	// Make Order
+	// ================================
+	public static void makeOrder() {
+		
+	}
 	
 	// ================================
 	// MAIN MENU
-	// Loops until exit
 	// ================================
 	public static void main(String[] args) {
 		int selection;
@@ -249,18 +253,18 @@ public class customer {
 			} else if (selection == 2) {
 				logOn(customerId, password);
 			} else if (selection == 3) {
-				logOut(customerId);
+				logOut(customerId, password, name, address, creditCard, securityAnswer, securityQuestion);
 			} else if (selection == 4) {
 				selectItems();
 			} else if (selection == 5) {
-				makeOrder();   // note: menu label says "View Order", but method call is makeOrder()
+				viewOrder();   
 			} else if (selection == 6) {
-				viewOrder();   // menu label says "Make Order", but method call is viewOrder()
+				makeOrder();   
 			} else if (selection == 7) {
 				System.out.print("Exiting program");
 				break;
 			} else {
-				System.out.print("Selection wasnt between 1 - 6, please try again!");
+				System.out.print("Selection wasnt between 1 - 7, please try again!");
 			}
 		}
 	}
