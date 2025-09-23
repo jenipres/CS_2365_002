@@ -1,4 +1,4 @@
-import java.util.Scanner;
+mport java.util.Scanner;
 import java.util.ArrayList;
 public class customer {
 	// ================================
@@ -98,7 +98,7 @@ public class customer {
 	}
 
 	// ================================
-	// LOG OUT 
+	// LOG OUT METHOD
 	// ================================
 	public static void logOut(String customerId) {
 			customerIds.clear();
@@ -113,7 +113,7 @@ public class customer {
 	}
 	
 	// ================================
-	// CREATE ACCOUNT
+	// CREATE ACCOUNT METHOD
 	// ================================
 	public static void createAccount(String customerId, String password, String name, String address, String creditCard, String securityAnswer, String securityQuestion) {
 		int securityQuestionSelection;
@@ -214,21 +214,76 @@ public class customer {
 	}
 
 	// ================================
-	// Select Items
+	// SELECT ITEMS METHOD
 	// ================================
 	public static void selectItems() {
+		double salesPrice, regularPrice;
+		salesPrice = regularPrice * (1 - 0.20); // 20% could be different in the future
+		int productSelection;
+		int totalMilk = 0;
+		int totalBread = 0;
+		int totalEggs = 0;
+		int finalTotal;
+		int milkCount, breadCount, eggsCount, milkQuantity, breadQuantity, eggsQuantity;
+		System.out.printf("%-15s | %-25s | %-13s | %-12s%n", "Product", "Description", "Regular Price", "Sales Price");
+		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Whole Milk", "Milk from a cow", "$3", salesPrice);
+		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Bread", "Bread from a bakery", "$2", salesPrice);
+		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Eggs", "Eggs from a chicken", "$5", salesPrice);
+		while(true)
+		{
+			System.out.println("Select which product(1-3)\nEnter here(input 0 to exit): ");
+			productSelection = input.nextInt();
+			input.nextLine();
+			if(productSelection == 1)
+			}
+				milkCount++;
+				System.out.print("Select Quantity\nEnter here: ")
+				milkQuantity = input.nextInt();
+				input.nextLine();
+			{
+			else if(productSelection == 2)
+			{
+				breadCount++;
+				System.out.print("Select Quantity\nEnter here: ")
+				breadQuantity= input.nextInt();
+				input.nextLine();
+			}
+			else if(productSelection == 3)
+			{
+				eggsCount++;
+				System.out.print("Select Quantity\nEnter here: ")
+				eggsQuantity = input.nextInt();
+				input.nextLine();
+			}
+			else if(productSelection == 0)
+			{
+				totalMilk = ((3 * milkCount) * milkQuantity) * 0.825;
+				totalBread = ((2 * breadCount) * breadQuantity) * 0.825;
+				totalEggs = ((5 * eggsCount) * eggsQuantity) * 0.825;
+				finalTotal = totalMilk + totalEggs + totalBread;
+				break;
+			}
+			else 
+				System.out.print("");
 		
-	}
+		}	
+	}	
+  
+	
+	
+	
+	
+	
 	
 	// ================================
-	// View Order
+	// VIEW ORDER METHOD
 	// ================================
 	public static void viewOrder() {
 		
 	}
 	
 	// ================================
-	// Make Order
+	// MAKE ORDER METHOD
 	// ================================
 	public static void makeOrder() {
 		
