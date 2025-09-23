@@ -1,4 +1,4 @@
-mport java.util.Scanner;
+import java.util.Scanner;
 import java.util.ArrayList;
 public class customer {
 	// ================================
@@ -11,6 +11,11 @@ public class customer {
 	private static String creditCard;
 	private static String securityAnswer;
 	private static String securityQuestion;
+	private static int milkQuantity = 0;
+	private static int breadQuantity = 0;
+	private static int eggsQuantity = 0;
+	private static double finalTotal = 0.0;
+
 	// ================================
 	// OBJECTS
 	// ================================
@@ -21,6 +26,10 @@ public class customer {
 	static ArrayList<String> creditCards = new ArrayList<>();
 	static ArrayList<String> securityAnswers = new ArrayList<>();
 	static ArrayList<String> securityQuestions = new ArrayList<>();
+	static ArrayList<Integer> milkQuantities = new ArrayList<>();
+	static ArrayList<Integer> breadQuantities = new ArrayList<>();
+	static ArrayList<Integer> eggsQuantities = new ArrayList<>();
+	static ArrayList<Double> finalTotals = new ArrayList<>();
 	static Scanner input = new Scanner(System.in); 
 	// ================================
 	// CONSTRUCTOR
@@ -48,7 +57,7 @@ public class customer {
 	// ================================
 	// LOGIN METHOD
 	// ================================
-	public static void logOn(String customerId, String password) {
+	public static void logOn() {
 		int attempts = 0;
 
 		while (true) {
@@ -100,7 +109,7 @@ public class customer {
 	// ================================
 	// LOG OUT METHOD
 	// ================================
-	public static void logOut(String customerId) {
+	public static void logOut() {
 			customerIds.clear();
 			names.clear();
 			passwords.clear();
@@ -115,7 +124,7 @@ public class customer {
 	// ================================
 	// CREATE ACCOUNT METHOD
 	// ================================
-	public static void createAccount(String customerId, String password, String name, String address, String creditCard, String securityAnswer, String securityQuestion) {
+	public static void createAccount() { 
 		int securityQuestionSelection;
 
 		for (;;) {  // outer loop (wraps entire process)
@@ -217,56 +226,74 @@ public class customer {
 	// SELECT ITEMS METHOD
 	// ================================
 	public static void selectItems() {
-		double salesPrice, regularPrice;
-		salesPrice = regularPrice * (1 - 0.20); // 20% could be different in the future
+		milkQuantity = breadQuantity = eggsQuantity = 0; 
+		
 		int productSelection;
-		int totalMilk = 0;
-		int totalBread = 0;
-		int totalEggs = 0;
-		int finalTotal;
-		int milkCount, breadCount, eggsCount, milkQuantity, breadQuantity, eggsQuantity;
+		double totalMilk = 0.0, totalBread = 0.0, totalEggs = 0.0;
+		double milkTax, breadTax, eggsTax, finalTax;
 		System.out.printf("%-15s | %-25s | %-13s | %-12s%n", "Product", "Description", "Regular Price", "Sales Price");
-		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Whole Milk", "Milk from a cow", "$3", salesPrice);
-		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Bread", "Bread from a bakery", "$2", salesPrice);
-		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Eggs", "Eggs from a chicken", "$5", salesPrice);
+		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Whole Milk", "Milk from a cow", "$3.00", "2.40");
+		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Bread", "Bread from a bakery", "$2.00", "1.60");
+		System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Eggs", "Eggs from a chicken", "$5.00", "4.00");
 		while(true)
 		{
-			System.out.println("Select which product(1-3)\nEnter here(input 0 to exit): ");
+			System.out.print("Select which product(1-3)\nEnter here(input 0 to exit): ");
 			productSelection = input.nextInt();
 			input.nextLine();
 			if(productSelection == 1)
-			}
-				milkCount++;
-				System.out.print("Select Quantity\nEnter here: ")
-				milkQuantity = input.nextInt();
-				input.nextLine();
 			{
+				System.out.print("Select Quantity\nEnter here: ");
+				milkQuantity += input.nextInt();
+				input.nextLine();
+			}
 			else if(productSelection == 2)
 			{
-				breadCount++;
-				System.out.print("Select Quantity\nEnter here: ")
-				breadQuantity= input.nextInt();
+				System.out.print("Select Quantity\nEnter here: ");
+				breadQuantity += input.nextInt();
 				input.nextLine();
 			}
 			else if(productSelection == 3)
 			{
-				eggsCount++;
-				System.out.print("Select Quantity\nEnter here: ")
-				eggsQuantity = input.nextInt();
+				System.out.print("Select Quantity\nEnter here: ");
+				eggsQuantity += input.nextInt();
 				input.nextLine();
 			}
 			else if(productSelection == 0)
 			{
-				totalMilk = ((3 * milkCount) * milkQuantity) * 0.825;
-				totalBread = ((2 * breadCount) * breadQuantity) * 0.825;
-				totalEggs = ((5 * eggsCount) * eggsQuantity) * 0.825;
-				finalTotal = totalMilk + totalEggs + totalBread;
 				break;
+			} 
+			else if(productSelection < 1 || productSelection > 3)
+			{
+				System.out.print("Invalid selection!");
+				continue; 
 			}
-			else 
-				System.out.print("");
+		}
 		
-		}	
+			if(milkQuantity == 0 && breadQuantity == 0 && eggsQuantity == 0)
+			{
+				System.out.print("Nothing selected");
+				return;
+			}
+			
+			totalMilk = (2.40 * milkQuantity);	
+			totalBread = (1.60 * breadQuantity);
+			totalEggs = (4.00 * eggsQuantity);
+			milkTax = totalMilk * 0.0825;
+			breadTax = totalBread * 0.0825;
+			eggsTax = totalEggs * 0.0825;
+			finalTax = milkTax + breadTax + eggsTax;
+			finalTotal = totalMilk + totalEggs + totalBread;
+			
+			milkQuantities.add(milkQuantity);
+			breadQuantities.add(breadQuantity);
+			eggsQuantities.add(eggsQuantity);
+			finalTotals.add(finalTotal + finalTax);
+				
+			System.out.printf("%-15s | %-10s | %-10s | %-12s%n", "Product", "Quantity", "Tax", "Final Total");
+			System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Whole Milk", milkQuantity, milkTax, totalMilk + milkTax);
+			System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Bread", breadQuantity, breadTax, totalBread + breadTax);
+			System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Eggs", eggsQuantity, eggsTax, totalEggs + eggsTax);
+			System.out.printf("%-15s | %-10s | %-10s | $%-11.2f%n", "", "", "Final Total", finalTotal + finalTax);
 	}	
 
 	// ================================
@@ -291,18 +318,18 @@ public class customer {
 		
 		while (true) {
 			// menu display
-			System.out.print("----Customer Main Menu----");
+			System.out.print("\n----Customer Main Menu----");
 			System.out.print("\n1. Create Account \n2. Login Account \n3. Logout Account\n4. Select Items\n5. View Order\n6. Make Order\n7. Exit Program\nEnter: ");
 			
 			selection = input.nextInt();
 			input.nextLine(); // clear newline
 			
 			if (selection == 1) {
-				createAccount(customerId, password, name, address, creditCard, securityAnswer, securityQuestion);
+				createAccount(); 
 			} else if (selection == 2) {
-				logOn(customerId, password);
+				logOn();
 			} else if (selection == 3) {
-				logOut(customerId, password, name, address, creditCard, securityAnswer, securityQuestion);
+				logOut();
 			} else if (selection == 4) {
 				selectItems();
 			} else if (selection == 5) {
