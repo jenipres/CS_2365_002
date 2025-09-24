@@ -1,17 +1,336 @@
-import java.util.Scanner;
+mport java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 import java.time.LocalDate;
 public class customer {
-	// ================================
-	// OBJECTS
-	// ================================
-	static ArrayList<CustomerInfo> customerInfos = new ArrayList<>();
-	static ArrayList<CustomerOrder> customerOrders = new ArrayList<>();
-	static CustomerOrder order = new CustomerOrder();
-	static CustomerInfo info = new CustomerInfo();
-	static final Scanner input = new Scanner(System.in);
-	static Random rand = new Random();
+// ================================
+// OBJECTS
+// ================================
+static ArrayList<CustomerInfo> customerInfos = new ArrayList<>();
+static ArrayList<CustomerOrder> customerOrders = new ArrayList<>();
+static CustomerOrder order = new CustomerOrder();
+static CustomerInfo info = new CustomerInfo();
+static final Scanner input = new Scanner(System.in);
+static Random rand = new Random();
+// ================================
+// CREATE ACCOUNT METHOD
+// ================================
+public static void createAccount() { 
+    String customerId, password, name, address, creditCard;
+    String securityQuestion = null, securityAnswer = null;
+    int securityQuestionSelection;
+
+    for (;;) {  
+
+        // STEP 1: 
+        // STEP 2: 
+        for (;;) {
+            System.out.print("Enter customer ID: ");
+            customerId = input.nextLine();
+
+            boolean exists = false;
+            for (CustomerInfo c : customerInfos) {
+                if (c.getCustomerId().equals(customerId)) {
+                    exists = true;
+                    break;
+                }
+            }
+
+            // ALT @ Step 3: → then go to Step 2.
+            if (!exists) {
+                // STEP 3: 
+                break; 
+            } else {
+                System.out.println("This customer already exist try again\n");
+                continue; 
+            }
+        }
+
+        // STEP 4: 
+        // STEP 5: 
+        for (;;) {
+            System.out.print("Enter a password(6 character minimum, one digit, one special character, and a uppercase): ");
+            password = input.nextLine();
+
+            if (password.matches(".*[!@#$%^&*?].*") && password.length() >= 6 && password.matches(".*[A-Z].*") && password.matches(".*[0-9].*")) {
+                break;
+            } else {
+                // ALT @ Step 5 → back to Step 4.
+                System.out.println("Invalid password please try again\n");
+                continue;
+            }
+        }
+
+        // STEP 5 
+        // STEP 6: 
+        // STEP 7:
+        for (;;) {
+            System.out.println("Enter Name, Address, and credit card number");
+            System.out.print("Enter here: ");
+            name = input.nextLine();
+            System.out.print("Enter here: ");
+            address = input.nextLine();
+            System.out.print("Enter here: ");
+            creditCard = input.nextLine();
+
+            if (!name.isEmpty() && !address.isEmpty() && !creditCard.isEmpty()) {
+                break;
+            } else {
+                // ALT @ Step 7 → back to Step 6.
+                System.out.println("Error try again\n");
+                continue;
+            }
+        }
+
+        // STEP 8: 
+        // STEP 9: 
+        // STEP 10: 
+        for (;;) {
+            System.out.print(
+                "----Security Question List----\n" +
+                "1. What city were you born in?\n" +
+                "2. Favorite movie?\n" +
+                "3. What year are you graduating?\nEnter here: "
+            );
+
+            if (input.hasNextInt()) {
+                securityQuestionSelection = input.nextInt();
+                if (securityQuestionSelection == 1) {
+                    securityQuestion = "What city were you born in?";
+                } else if (securityQuestionSelection == 2) {
+                    securityQuestion = "Favorite movie?";
+                } else if (securityQuestionSelection == 3) {
+                    securityQuestion = "What year are you graduating?";
+                }
+                input.nextLine(); 
+            } else {
+                input.nextLine();
+                System.out.println("Invalid selection, try again\n");
+                continue;
+            }
+
+            if (securityQuestionSelection == 1 || securityQuestionSelection == 2 || securityQuestionSelection == 3) {
+                System.out.print("Enter answer: ");
+                securityAnswer = input.nextLine(); // Step 9 input
+                break; 
+            } else {
+                System.out.println("Invalid selection, try again\n");
+                continue;
+            }
+        }
+
+        // STEP 10 
+        CustomerInfo info = new CustomerInfo(customerId, password, name, address, creditCard, securityQuestion, securityAnswer);
+        info.setSecurityQuestion(securityQuestion);
+        info.setSecurityAnswer(securityAnswer);
+        customerInfos.add(info);
+
+        // STEP 7 
+        System.out.println("Account created!\n");
+
+        // End of Create Account main flow
+        break; 
+    }
+}
+
+// ================================
+// SELECT ITEMS METHOD
+// ================================
+public static void selectItems() { 
+    int milkQuantity, breadQuantity, eggsQuantity; 
+	milkQuantity = breadQuantity = eggsQuantity = 0; 
+    
+    int productSelection;
+    double totalMilk = 0.0, totalBread = 0.0, totalEggs = 0.0;
+    double milkTax, breadTax, eggsTax, finalTax;
+	double finalTotal = 0;
+	// STEP 1
+	// STEP 2
+    System.out.printf("%-15s | %-25s | %-13s | %-12s%n", "Product", "Description", "Regular Price", "Sales Price");
+    System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Whole Milk", "Milk from a cow", "$3.00", "2.40");
+    System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Bread", "Bread from a bakery", "$2.00", "1.60");
+    System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Eggs", "Eggs from a chicken", "$5.00", "4.00");
+	// STEP 3
+    while (true) {
+        System.out.print("Select which product(1-3)\nEnter here(input 0 to exit): ");
+        productSelection = input.nextInt();
+        input.nextLine();
+        if (productSelection == 1) {
+            System.out.print("Select Quantity\nEnter here: ");
+            milkQuantity += input.nextInt();
+            input.nextLine();
+        } else if (productSelection == 2) {
+            System.out.print("Select Quantity\nEnter here: ");
+            breadQuantity += input.nextInt();
+            input.nextLine();
+        } else if (productSelection == 3) {
+            System.out.print("Select Quantity\nEnter here: ");
+            eggsQuantity += input.nextInt();
+            input.nextLine();
+        } else if (productSelection == 0) {
+            break;
+        } else if (productSelection < 1 || productSelection > 3) {
+            System.out.print("Invalid selection!");
+            continue; 
+        }
+    }
+    // STEP 3 -> EXIT
+    if (milkQuantity == 0 && breadQuantity == 0 && eggsQuantity == 0) {
+        System.out.print("Nothing selected");
+        return;
+    }
+    
+    totalMilk  = (2.40 * milkQuantity);    
+    totalBread = (1.60 * breadQuantity);
+    totalEggs  = (4.00 * eggsQuantity);
+    milkTax = totalMilk  * 0.0825;
+    breadTax = totalBread * 0.0825;
+    eggsTax = totalEggs  * 0.0825;
+    finalTax = milkTax + breadTax + eggsTax;
+    finalTotal = totalMilk + totalEggs + totalBread;
+// STEP 4
+    CustomerOrder order = new CustomerOrder();
+    order.setMilkQuantity(milkQuantity);
+    order.setBreadQuantity(breadQuantity);
+    order.setEggsQuantity(eggsQuantity);
+    order.setFinalTotal(finalTotal + finalTax);
+    customerOrders.add(order);
+// STEP 5
+    System.out.printf("%-15s | %-10s | %-10s | %-12s%n", "Product", "Quantity", "Tax", "Final Total");
+    System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Whole Milk", milkQuantity, milkTax, totalMilk + milkTax);
+    System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Bread",     breadQuantity, breadTax, totalBread + breadTax);
+    System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Eggs",      eggsQuantity,  eggsTax,  totalEggs + eggsTax);
+    System.out.printf("%-15s | %-10s | %-10s | $%-11.2f%n",   "", "", "Final Total", finalTotal + finalTax);
+}
+
+// ================================
+// MAKE ORDER METHOD
+// ================================
+
+public static void makeOrder() {
+    if (customerOrders.isEmpty() || customerInfos.isEmpty()) {
+        System.out.println("No items or customer on file. Please create account and select items first.");
+        return;
+    }
+
+    CustomerInfo info = customerInfos.get(customerInfos.size() - 1);
+    CustomerOrder order = customerOrders.get(customerOrders.size() - 1);
+    order.setCustomerId(info.getCustomerId());
+
+    int deliveryOption;
+    double deliveryFee = 0.0;
+
+    // Simple per-card credit line (simulation)
+    double creditLimitRemaining = 500.0;
+
+    System.out.print("(1) mail by charging a fee (e.g., $3.00 per order) or (2) in-store pick up for free, or (0) cancel.\nEnter Here: ");
+    if (!input.hasNextInt()) { input.nextLine(); System.out.println("Invalid selection"); return; }
+    deliveryOption = input.nextInt();
+    input.nextLine();
+
+    if (deliveryOption == 0) { System.out.println("Order cancelled."); return; }
+    else if (deliveryOption == 1) deliveryFee = 3.00;
+    else if (deliveryOption == 2) deliveryFee = 0.00;
+    else { System.out.println("Invalid selection"); return; }
+
+    // Subtotal should already include items + tax from selectItems()
+    double subtotal = order.getFinalTotal();
+    double grandTotal = subtotal + deliveryFee;
+
+    System.out.printf("Total (before delivery): $%.2f%n", subtotal);
+    System.out.printf("Delivery fee: $%.2f%n", deliveryFee);
+    System.out.printf("Grand total: $%.2f%n", grandTotal);
+
+    // Step 5: retrieve stored card first; only prompt if none
+    String enteredCard = info.getCreditCard();
+    if (enteredCard == null || enteredCard.isEmpty()) {
+        System.out.print("Enter your credit card number (or 0 to cancel): ");
+        enteredCard = input.nextLine().trim();
+        if ("0".equals(enteredCard)) { System.out.println("Order cancelled."); return; }
+    } else {
+        System.out.println("Using card on file ending in " +
+            (enteredCard.length() >= 4 ? enteredCard.substring(enteredCard.length() - 4) : "****"));
+    }
+
+    // Step 7 alt: retry loop until approved or user exits
+    while (true) {
+        // Over credit limit?
+        if (grandTotal > creditLimitRemaining) {
+            System.out.println("Charge denied (over credit limit). Enter another credit card number or 0 to exit:");
+            enteredCard = input.nextLine().trim();
+            if ("0".equals(enteredCard)) { System.out.println("Order cancelled."); return; }
+            // Treat new card as a fresh account with fresh limit in this simulation
+            creditLimitRemaining = 1000.0;
+            continue;
+        }
+
+        // Invalid card? (only rule here: non-empty)
+        if (enteredCard == null || enteredCard.isEmpty()) {
+            System.out.println("Charge denied (invalid card). Enter another credit card number or 0 to exit:");
+            enteredCard = input.nextLine().trim();
+            if ("0".equals(enteredCard)) { System.out.println("Order cancelled."); return; }
+            continue;
+        }
+
+        // Approved: simulate bank authorization (4 digits)
+        int authCode = rand.nextInt(9000) + 1000; // 1000–9999
+
+        // Update stored card per prompt
+        info.setCreditCard(enteredCard);
+
+        // Step 8: store order details (assumes product lines already set in selectItems())
+        order.setAuthCode(authCode);
+        order.setFinalTotal(grandTotal);
+        order.setOrderDate(java.time.LocalDate.now());
+        order.setCreditCard(enteredCard);
+
+        // Do NOT re-add 'order' to customerOrders (we’re modifying the existing one)
+        creditLimitRemaining -= grandTotal;
+
+        // Step 9: confirmation
+        System.out.println("Transaction success, Authorization code: " + authCode);
+        System.out.printf("Remaining credit on this card (simulated): $%.2f%n", creditLimitRemaining);
+        break;
+    }
+}
+
+// ================================
+// VIEW ORDER METHOD
+// ================================
+public static void viewOrder() {
+	System.out.print("---Order information---");
+	System.out.printf("\n%-12s | %-12s | %-10s | %-10s | %-8s | %-12s%n", "Customer ID", "Order Date", "Auth Code", "Product", "Quantity", "Grand Total");
+    for(CustomerOrder order : customerOrders)
+	{
+		// Milk row
+System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
+    order.getCustomerId(),
+    order.getOrderDate(),
+    order.getAuthCode(),
+    "Whole Milk",
+    order.getMilkQuantity(),
+    order.getFinalTotal());
+
+// Bread row
+System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
+    order.getCustomerId(),
+    order.getOrderDate(),
+    order.getAuthCode(),
+    "Bread",
+    order.getBreadQuantity(),
+    order.getFinalTotal());
+
+// Eggs row
+System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
+    order.getCustomerId(),
+    order.getOrderDate(),
+    order.getAuthCode(),
+    "Eggs",
+    order.getEggsQuantity(),
+    order.getFinalTotal());
+	}
+}
+
 	// ================================
 	// LOGIN METHOD
 	// ================================
@@ -56,274 +375,15 @@ public class customer {
     }
 }
 
-	static int findCustomerIndex(String id) {
-		for (int i = 0; i < customerInfos.size(); i++) {
-			if (customerInfos.get(i).getCustomerId().equals(id)) return i;
-		}
-		return -1;
-	}
-
 	// ================================
 	// LOG OUT METHOD
 	// ================================
 	public static void logOut() {
 		customerInfos.clear();
-		System.out.print("Successfully logged out");
+		customerOrders.clear();
+		System.out.print("Successfully logged out all accounts");
 	}
 	
-// ================================
-// CREATE ACCOUNT METHOD
-// ================================
-public static void createAccount() { 
-	String customerId, password, name, address, creditCard;
-	String securityQuestion = null, securityAnswer = null;
-    int securityQuestionSelection;
-
-    for (;;) {  // outer loop (wraps entire process)
-
-        // Step 2 / 3: Customer ID must be unique
-        for (;;) {
-            System.out.print("Enter customer ID: ");
-            customerId = input.nextLine();
-			
-            // replace: if (!customerIds.contains(customerId)) { ... }
-            boolean exists = false;
-            for (CustomerInfo c : customerInfos) {
-                if (c.getCustomerId().equals(customerId)) {
-                    exists = true;
-                    break;
-                }
-            }
-
-            if (!exists) {
-                break; // valid ID → continue
-            } else {
-                System.out.println("This customer already exist try again\n");
-                continue; // retry
-            }
-        }
-
-        // Step 4 / 5: Password validation
-        for (;;) {
-            System.out.print("Enter a password(6 character minimum, one digit, one special character, and a uppercase): ");
-            password = input.nextLine();
-
-            if (password.matches(".*[!@#$%^&*?].*") && password.length() >= 6 && password.matches(".*[A-Z].*") && password.matches(".*[0-9].*")) 
-			{
-                break; // valid password
-            } else {
-                System.out.println("Invalid password please try again\n");
-                continue; 
-            }
-        }
-
-        // Step 6 / 7: Personal details
-        for (;;) {
-            System.out.println("Enter Name, Address, and credit card number");
-            System.out.print("Enter here: ");
-            name = input.nextLine();
-            System.out.print("Enter here: ");
-            address = input.nextLine();
-            System.out.print("Enter here: ");
-            creditCard = input.nextLine();
-
-            if (!name.isEmpty() && !address.isEmpty() && !creditCard.isEmpty()) {
-                break; // all good
-            } else {
-                System.out.println("Error try again\n");
-                continue; 
-            }
-        }
-
-        // Step 8: Security question
-        for (;;) {
-            System.out.print("----Security Question List----\n" + "1. What city were you born in?\n" + "2. Favorite movie?\n" + "3. What year are you graduating?\nEnter here: ");
-            if (input.hasNextInt()) {
-                securityQuestionSelection = input.nextInt();
-                if (securityQuestionSelection == 1) {
-                    securityQuestion = "What city were you born in?";
-                } else if (securityQuestionSelection == 2) {
-                    securityQuestion = "Favorite movie?";
-                } else if (securityQuestionSelection == 3) {
-                    securityQuestion = "What year are you graduating?";
-                }
-                input.nextLine(); // consume newline
-            } else {
-                input.nextLine(); 
-                System.out.println("Invalid selection, try again\n");
-                continue;
-            }
-
-            if (securityQuestionSelection == 1 || securityQuestionSelection == 2 || securityQuestionSelection == 3) {
-                System.out.print("Enter answer: ");
-                securityAnswer = input.nextLine(); 
-                break; // valid choice
-            } else {
-                System.out.println("Invalid selection, try again\n");
-                continue;
-            }
-        }
-        // Store all details using CustomerInfo instead of parallel ArrayLists
-        CustomerInfo info = new CustomerInfo(customerId, password, name, address, creditCard, securityQuestion, securityAnswer);
-        info.setSecurityQuestion(securityQuestion);
-        info.setSecurityAnswer(securityAnswer);
-        customerInfos.add(info);
-
-        System.out.println("Account created!\n");
-        break; // exit outer loop
-    }
-}
-
-
-// ================================
-// SELECT ITEMS METHOD
-// ================================
-public static void selectItems() {
-    int milkQuantity, breadQuantity, eggsQuantity; 
-	milkQuantity = breadQuantity = eggsQuantity = 0; 
-    
-    int productSelection;
-    double totalMilk = 0.0, totalBread = 0.0, totalEggs = 0.0;
-    double milkTax, breadTax, eggsTax, finalTax;
-	double finalTotal = 0;
-    System.out.printf("%-15s | %-25s | %-13s | %-12s%n", "Product", "Description", "Regular Price", "Sales Price");
-    System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Whole Milk", "Milk from a cow", "$3.00", "2.40");
-    System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Bread", "Bread from a bakery", "$2.00", "1.60");
-    System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Eggs", "Eggs from a chicken", "$5.00", "4.00");
-    while (true) {
-        System.out.print("Select which product(1-3)\nEnter here(input 0 to exit): ");
-        productSelection = input.nextInt();
-        input.nextLine();
-        if (productSelection == 1) {
-            System.out.print("Select Quantity\nEnter here: ");
-            milkQuantity += input.nextInt();
-            input.nextLine();
-        } else if (productSelection == 2) {
-            System.out.print("Select Quantity\nEnter here: ");
-            breadQuantity += input.nextInt();
-            input.nextLine();
-        } else if (productSelection == 3) {
-            System.out.print("Select Quantity\nEnter here: ");
-            eggsQuantity += input.nextInt();
-            input.nextLine();
-        } else if (productSelection == 0) {
-            break;
-        } else if (productSelection < 1 || productSelection > 3) {
-            System.out.print("Invalid selection!");
-            continue; 
-        }
-    }
-    
-    if (milkQuantity == 0 && breadQuantity == 0 && eggsQuantity == 0) {
-        System.out.print("Nothing selected");
-        return;
-    }
-    
-    totalMilk  = (2.40 * milkQuantity);    
-    totalBread = (1.60 * breadQuantity);
-    totalEggs  = (4.00 * eggsQuantity);
-    milkTax = totalMilk  * 0.0825;
-    breadTax = totalBread * 0.0825;
-    eggsTax = totalEggs  * 0.0825;
-    finalTax = milkTax + breadTax + eggsTax;
-    finalTotal = totalMilk + totalEggs + totalBread;
-
-    CustomerOrder order = new CustomerOrder();
-    order.setMilkQuantity(milkQuantity);
-    order.setBreadQuantity(breadQuantity);
-    order.setEggsQuantity(eggsQuantity);
-    order.setFinalTotal(finalTotal + finalTax);
-    //order.setOrderDate(LocalDate.now());
-    customerOrders.add(order);
-
-    System.out.printf("%-15s | %-10s | %-10s | %-12s%n", "Product", "Quantity", "Tax", "Final Total");
-    System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Whole Milk", milkQuantity, milkTax, totalMilk + milkTax);
-    System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Bread",     breadQuantity, breadTax, totalBread + breadTax);
-    System.out.printf("%-15s | %-10d | %-10.2f | $%-11.2f%n", "Eggs",      eggsQuantity,  eggsTax,  totalEggs + eggsTax);
-    System.out.printf("%-15s | %-10s | %-10s | $%-11.2f%n",   "", "", "Final Total", finalTotal + finalTax);
-}
-
-// ================================
-// VIEW ORDER METHOD
-// ================================
-public static void viewOrder() {
-    
-}
-
-// ================================
-// MAKE ORDER METHOD
-// ================================
-
-public static void makeOrder() {
-    if (customerOrders.isEmpty() || customerInfos.isEmpty()) {
-        System.out.println("No items or customer on file. Please create account and select items first.");
-        return;
-    }
-
-    CustomerInfo info = customerInfos.get(customerInfos.size() - 1);
-    CustomerOrder order = customerOrders.get(customerOrders.size() - 1);
-    order.setCustomerId(info.getCustomerId());
-
-    int deliveryOption;
-    double deliveryFee = 0.0;
-    double creditLimit = 500.0; // all credit cards will have the same credit line
-	String cardCheck;
-
-    int authCode = rand.nextInt((9999 - 1000) + 1) + 1000; // 1000..9999
-
-    System.out.print("(1) mail by charging a fee (e.g., $3.00 per order) or (2) in-store pick up for free, or (0) cancel.\nEnter Here: ");
-    if (!input.hasNextInt()) { input.nextLine(); System.out.println("Invalid selection"); return; }
-    deliveryOption = input.nextInt();
-    input.nextLine();
-
-    if (deliveryOption == 0) { System.out.println("Order cancelled."); return; }
-    else if (deliveryOption == 1) deliveryFee = 3.00;
-    else if (deliveryOption == 2) deliveryFee = 0.00;
-    else { System.out.println("Invalid selection"); return; }
-
-    double subtotal = order.getFinalTotal();      // items+tax from selectItems()
-    double grandTotal = subtotal + deliveryFee;
-
-    System.out.printf("Total (before delivery): $%.2f%n", subtotal);
-    System.out.printf("Delivery fee: $%.2f%n", deliveryFee);
-    System.out.printf("Grand total: $%.2f%n", grandTotal);
-	
-	String card = info.getCreditCard(); // this is not user specific 
-	System.out.print("Enter your credit card number\nEnter here: ");
-	cardCheck = input.nextLine();
-	
-
-    /*while (card == null || card.equals(cardCheck) || grandTotal > creditLimit) { //card.equals(cardCheck) isnt working properly 
-        System.out.println("Charge denied (invalid card or over limit). Enter another credit card number or 0 to exit:");
-        String newCard = input.nextLine();
-        if ("0".equals(newCard)) { System.out.println("Order cancelled."); return; }
-        info.setCreditCard(newCard);              // update account per alt step 7
-        card = newCard;
-		creditLimit -= grandTotal;
-        // (in this simple simulation the limit stays $500)
-        if (!(card == null || card.isEmpty())) break; // accept non-empty as “valid”
-    }*/
-	
-	while(true)
-	{
-		if(grandTotal > creditLimit)
-		{
-			System.out.println("Charge denied, limit has been maxed out! Make a new credit card or 0 to exit: ");
-		}
-		
-	}
-	creditLimit -= grandTotal;
-	//CustomerOrder order = new CustomerOrder();
-    order.setAuthCode(authCode);
-	order.setFinalTotal(grandTotal); 
-	order.setOrderDate(LocalDate.now());
-	order.setCreditCard(card);
-	customerOrders.add(order);
-
-	System.out.println("Credit card balance: " + creditLimit);
-    System.out.println("Transaction success, Authorization code: " + authCode);
-}
-
 	// ================================
 	// MAIN MENU
 	// ================================
@@ -331,12 +391,11 @@ public static void makeOrder() {
 		int selection;
 		
 		while (true) {
-			// menu display
 			System.out.print("\n----Customer Main Menu----");
 			System.out.print("\n1. Create Account \n2. Login Account \n3. Logout Account\n4. Select Items\n5. View Order\n6. Make Order\n7. Exit Program\nEnter: ");
 			
 			selection = input.nextInt();
-			input.nextLine(); // clear newline
+			input.nextLine(); 
 			
 			if (selection == 1) {
 				createAccount(); 
@@ -360,6 +419,15 @@ public static void makeOrder() {
 	}
 }
 
+// ================================
+// FIND CUSTOMER
+// ================================
+static int findCustomerIndex(String id) {
+		for (int i = 0; i < customerInfos.size(); i++) {
+			if (customerInfos.get(i).getCustomerId().equals(id)) return i;
+		}
+		return -1;
+	}
 // ======================
 // BLUEPRINT CLASS/ ARRAYS
 // ======================
@@ -389,6 +457,9 @@ class CustomerInfo {
 		this.securityAnswer = securityAnswer;
 		
 	}
+	// ================================
+	// DEFAULT CONSTRUCTOR
+	// ================================
 	public CustomerInfo() {}
 	
 	// ================================
@@ -436,6 +507,9 @@ class CustomerOrder {
 		this.orderDate = orderDate;
 		
 	}
+	// ================================
+	// DEFAULT CONSTRUCTOR
+	// ================================
 	public CustomerOrder() {}
 	
 	// ================================
