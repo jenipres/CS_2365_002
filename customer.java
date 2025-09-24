@@ -185,7 +185,7 @@ public static void selectItems() {
     int productSelection;
     double totalMilk = 0.0, totalBread = 0.0, totalEggs = 0.0;
     double milkTax, breadTax, eggsTax, finalTax;
-	double finalTotal;
+	double finalTotal = 0;
     System.out.printf("%-15s | %-25s | %-13s | %-12s%n", "Product", "Description", "Regular Price", "Sales Price");
     System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Whole Milk", "Milk from a cow", "$3.00", "2.40");
     System.out.printf("%-15s | %-25s | %-13s | $%s%n", "Bread", "Bread from a bakery", "$2.00", "1.60");
@@ -222,10 +222,10 @@ public static void selectItems() {
     totalMilk  = (2.40 * milkQuantity);    
     totalBread = (1.60 * breadQuantity);
     totalEggs  = (4.00 * eggsQuantity);
-    milkTax  = totalMilk  * 0.0825;
+    milkTax = totalMilk  * 0.0825;
     breadTax = totalBread * 0.0825;
-    eggsTax  = totalEggs  * 0.0825;
-    finalTax   = milkTax + breadTax + eggsTax;
+    eggsTax = totalEggs  * 0.0825;
+    finalTax = milkTax + breadTax + eggsTax;
     finalTotal = totalMilk + totalEggs + totalBread;
 
     CustomerOrder order = new CustomerOrder();
@@ -233,7 +233,7 @@ public static void selectItems() {
     order.setBreadQuantity(breadQuantity);
     order.setEggsQuantity(eggsQuantity);
     order.setFinalTotal(finalTotal + finalTax);
-    order.setOrderDate(LocalDate.now());
+    //order.setOrderDate(LocalDate.now());
     customerOrders.add(order);
 
     System.out.printf("%-15s | %-10s | %-10s | %-12s%n", "Product", "Quantity", "Tax", "Final Total");
@@ -266,10 +266,10 @@ public static void makeOrder() {
 
     int deliveryOption;
     double deliveryFee = 0.0;
-    double creditLimit = 500.0;
+    double creditLimit = 500.0; // all credit cards will have the same credit line
+	String cardCheck;
 
     int authCode = rand.nextInt((9999 - 1000) + 1) + 1000; // 1000..9999
-    order.setOrderDate(LocalDate.now());
 
     System.out.print("(1) mail by charging a fee (e.g., $3.00 per order) or (2) in-store pick up for free, or (0) cancel.\nEnter Here: ");
     if (!input.hasNextInt()) { input.nextLine(); System.out.println("Invalid selection"); return; }
@@ -283,26 +283,45 @@ public static void makeOrder() {
 
     double subtotal = order.getFinalTotal();      // items+tax from selectItems()
     double grandTotal = subtotal + deliveryFee;
-    order.setFinalTotal(grandTotal);              // persist fee into the order
 
     System.out.printf("Total (before delivery): $%.2f%n", subtotal);
     System.out.printf("Delivery fee: $%.2f%n", deliveryFee);
     System.out.printf("Grand total: $%.2f%n", grandTotal);
+	
+	String card = info.getCreditCard(); // this is not user specific 
+	System.out.print("Enter your credit card number\nEnter here: ");
+	cardCheck = input.nextLine();
+	
 
-    String card = info.getCreditCard();
-    while (card == null || card.isEmpty() || grandTotal > creditLimit) {
+    /*while (card == null || card.equals(cardCheck) || grandTotal > creditLimit) { //card.equals(cardCheck) isnt working properly 
         System.out.println("Charge denied (invalid card or over limit). Enter another credit card number or 0 to exit:");
         String newCard = input.nextLine();
         if ("0".equals(newCard)) { System.out.println("Order cancelled."); return; }
         info.setCreditCard(newCard);              // update account per alt step 7
         card = newCard;
+		creditLimit -= grandTotal;
         // (in this simple simulation the limit stays $500)
         if (!(card == null || card.isEmpty())) break; // accept non-empty as “valid”
-    }
-
+    }*/
+	
+	while(true)
+	{
+		if(grandTotal > creditLimit)
+		{
+			System.out.println("Charge denied, limit has been maxed out! Make a new credit card or 0 to exit: ");
+		}
+		
+	}
+	creditLimit -= grandTotal;
+	//CustomerOrder order = new CustomerOrder();
     order.setAuthCode(authCode);
+	order.setFinalTotal(grandTotal); 
+	order.setOrderDate(LocalDate.now());
+	order.setCreditCard(card);
+	customerOrders.add(order);
+
+	System.out.println("Credit card balance: " + creditLimit);
     System.out.println("Transaction success, Authorization code: " + authCode);
-    System.out.println("Order date: " + order.getOrderDate());
 }
 
 	// ================================
