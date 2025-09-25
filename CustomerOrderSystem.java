@@ -2,7 +2,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 import java.time.LocalDate;
-public class customer {
+public class CustomerOrderSystem {
 // ================================
 // OBJECTS
 // ================================
@@ -417,7 +417,6 @@ System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
 			}
 		}
 	}
-}
 
 // ================================
 // FIND CUSTOMER
@@ -428,6 +427,9 @@ static int findCustomerIndex(String id) {
 		}
 		return -1;
 	}
+}
+
+
 // ======================
 // BLUEPRINT CLASS/ ARRAYS
 // ======================
