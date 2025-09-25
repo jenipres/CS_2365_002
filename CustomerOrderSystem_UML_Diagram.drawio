@@ -1,0 +1,52 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="ouddOT63NMrtgz7EwMnm">
+    <mxGraphModel dx="1426" dy="1843" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-1" value="&amp;nbsp;CustomerOrderSystem" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="-80" width="320" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-3" value="{static} + createAccount() : Void&lt;br&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;+ selectItems(): Void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;+ makeOrder(): Void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;+ viewOrder(): Void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;+ logOn(): Void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;+ logOut(): Void&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;~ findCustomerIndex(): Int&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;{static}&amp;nbsp;&lt;/span&gt;+ Main(String[] args): Void&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="330" y="70" width="320" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-4" value="CustomerInfo" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="360" width="430" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-5" value="&lt;div&gt;- milkQuantity : int&lt;/div&gt;&lt;div&gt;&amp;nbsp; - breadQuantity : int&lt;/div&gt;&lt;div&gt;&amp;nbsp; - eggsQuantity : int&lt;/div&gt;&lt;div&gt;&amp;nbsp; - finalTotal : double&lt;/div&gt;&lt;div&gt;&amp;nbsp; - authCode : int&lt;/div&gt;&lt;div&gt;&amp;nbsp; - customerId : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - orderDate : LocalDate&lt;/div&gt;&lt;div&gt;&amp;nbsp; - creditCard : String&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="520" y="420" width="460" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-6" value="CustomerOrder" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="520" y="360" width="460" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-7" value="&lt;div&gt;&amp;nbsp;- customerId : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - password : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - name : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - address : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - creditCard : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - securityQuestion : String&lt;/div&gt;&lt;div&gt;&amp;nbsp; - securityAnswer : String&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="20" y="420" width="430" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-8" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="330" y="330" as="sourcePoint" />
+            <mxPoint x="390" y="270" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="370" y="290" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-12" value="" style="shape=flexArrow;endArrow=classic;html=1;rounded=0;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="640" y="330" as="sourcePoint" />
+            <mxPoint x="590" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-14" value="&lt;div&gt;&lt;div&gt;+ CustomerInfo(customerId:String, password:String, name:String,&amp;nbsp;&lt;/div&gt;&lt;div&gt;address:String, creditCard:String,&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;securityQuestion:String, securityAnswer:String) &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ CustomerInfo() &amp;lt;&amp;lt;constructer&amp;gt;&amp;gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;+ Getters/Setters()" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="20" y="550" width="430" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-15" value="&lt;div&gt;&lt;div&gt;+ CustomerOrder(customerId:String, milkQty:int, breadQty:int,&amp;nbsp;&lt;/div&gt;&lt;div&gt;&amp;nbsp;eggsQty:int, finalTotal:double,&amp;nbsp;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;creditCard:String, authCode:int, orderDate:LocalDate) &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; + CustomerOrder() &amp;lt;&amp;lt;constructor&amp;gt;&amp;gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;+ Getters/Setters()" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="520" y="550" width="460" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="d00dZz1iGKgfL-ZPb3lu-16" value="&lt;div&gt;&lt;div&gt;&amp;nbsp; {static} - customerInfos : ArrayList&amp;lt;CustomerInfo&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; {static} - customerOrders : ArrayList&amp;lt;CustomerOrder&amp;gt;&lt;/div&gt;&lt;div&gt;&amp;nbsp; {static} - input : Scanner&lt;/div&gt;&lt;div&gt;&amp;nbsp; {static} - rand : Random&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+          <mxGeometry x="330" y="-20" width="320" height="90" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
