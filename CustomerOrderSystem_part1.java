@@ -17,20 +17,7 @@ static Random rand = new Random();
 // ================================
 public static void createAccount() { 
     
-        }
-
-        // STEP 10 
-        CustomerInfo info = new CustomerInfo(customerId, password, name, address, creditCard, securityQuestion, securityAnswer);
-        info.setSecurityQuestion(securityQuestion);
-        info.setSecurityAnswer(securityAnswer);
-        customerInfos.add(info);
-
-        // STEP 7 
-        System.out.println("Account created!\n");
-
-        // End of Create Account main flow
-        break; 
-    }
+        
 }
 
 // ================================
