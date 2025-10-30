@@ -56,40 +56,6 @@ public static void viewOrder() {
 	public static void logOut() {
 	
 	}
-	
-	// ================================
-	// MAIN MENU
-	// ================================
-	public static void main(String[] args) {
-		int selection;
-		
-		while (true) {
-			System.out.print("\n----Customer Main Menu----");
-			System.out.print("\n1. Create Account \n2. Login Account \n3. Logout Account\n4. Select Items\n5. View Order\n6. Make Order\n7. Exit Program\nEnter: ");
-			
-			selection = input.nextInt();
-			input.nextLine(); 
-			
-			if (selection == 1) {
-				createAccount(); 
-			} else if (selection == 2) {
-				logOn();
-			} else if (selection == 3) {
-				logOut();
-			} else if (selection == 4) {
-				selectItems();
-			} else if (selection == 5) {
-				viewOrder();   
-			} else if (selection == 6) {
-				makeOrder();   
-			} else if (selection == 7) {
-				System.out.print("Exiting program");
-				break;
-			} else {
-				System.out.print("Selection wasnt between 1 - 7, please try again!");
-			}
-		}
-	}
 
 // ================================
 // FIND CUSTOMER
@@ -128,8 +94,8 @@ class CustomerInfo {
     this.name = name;
     this.address = address;
     this.creditCard = creditCard;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
+	this.securityQuestion = securityQuestion;
+	this.securityAnswer = securityAnswer;
 		
 	}
 	// ================================
@@ -140,7 +106,7 @@ class CustomerInfo {
 	// ================================
 	// ACCESSORS / MUTATORS
 	// ================================
-	public String getCustomerId() { return customerId; }
+  public String getCustomerId() { return customerId; }
   public void setCustomerId(String customerId) { this.customerId = customerId; }
   public String getPassword() { return password; }
   public void setPassword(String password) { this.password = password; }
