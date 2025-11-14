@@ -2,6 +2,16 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Random;
 import java.time.LocalDate;
+/**
+ * CustomerOrderSystem is a console-based application that allows users to:
+ * <ul>
+ *     <li>Create a customer account</li>
+ *     <li>Log in and log out</li>
+ *     <li>Select grocery items (milk, bread, eggs)</li>
+ *     <li>Place an order with delivery or pickup</li>
+ *     <li>View existing orders</li>
+ * </ul>
+ */
 public class CustomerOrderSystem {
 // ================================
 // OBJECTS
@@ -15,6 +25,16 @@ static Random rand = new Random();
 // ================================
 // CREATE ACCOUNT METHOD
 // ================================
+ /**
+     * Interactively creates a new customer account by:
+     * <ol>
+     *     <li>Prompting for a unique customer ID</li>
+     *     <li>Validating a password (length, digit, special character, uppercase)</li>
+     *     <li>Collecting name, address, and credit card</li>
+     *     <li>Choosing and answering a security question</li>
+     * </ol>
+     * On success, the new {@link CustomerInfo} is added to {@link #customerInfos}.
+     */
 public static void createAccount() { 
     String customerId, password, name, address, creditCard;
     String securityQuestion = null, securityAnswer = null;
@@ -136,6 +156,17 @@ public static void createAccount() {
 // ================================
 // SELECT ITEMS METHOD
 // ================================
+/**
+     * Allows the user to select quantities of Milk, Bread, and Eggs.
+     * The method:
+     * <ol>
+     *     <li>Displays available products and sales prices</li>
+     *     <li>Prompts for item selection and quantity</li>
+     *     <li>Computes subtotal, tax, and final total</li>
+     *     <li>Creates a {@link CustomerOrder} and adds it to {@link #customerOrders}</li>
+     *     <li>Prints a summary of the order</li>
+     * </ol>
+     */
 public static void selectItems() { 
     int milkQuantity, breadQuantity, eggsQuantity; 
 	milkQuantity = breadQuantity = eggsQuantity = 0; 
@@ -206,6 +237,17 @@ public static void selectItems() {
 // ================================
 // MAKE ORDER METHOD
 // ================================
+ /**
+     * Finalizes the most recent order by:
+     * <ol>
+     *     <li>Ensuring there is at least one customer and one order</li>
+     *     <li>Associating the latest {@link CustomerOrder} with the latest {@link CustomerInfo}</li>
+     *     <li>Asking for delivery method and fee</li>
+     *     <li>Using a stored credit card or prompting for a new one</li>
+     *     <li>Simulating credit limit checks and bank authorization</li>
+     *     <li>Updating the order with auth code, date, and card; then confirming the transaction</li>
+     * </ol>
+     */
 
 public static void makeOrder() {
     if (customerOrders.isEmpty() || customerInfos.isEmpty()) {
@@ -297,6 +339,12 @@ public static void makeOrder() {
 // ================================
 // VIEW ORDER METHOD
 // ================================
+/**
+     * Displays all orders stored in {@link #customerOrders}, showing:
+     * customer ID, order date, authorization code, product name,
+     * quantity, and grand total. Each order is printed in three rows
+     * (one for each product type).
+     */
 public static void viewOrder() {
 	System.out.print("---Order information---");
 	System.out.printf("\n%-12s | %-12s | %-10s | %-10s | %-8s | %-12s%n", "Customer ID", "Order Date", "Auth Code", "Product", "Quantity", "Grand Total");
@@ -334,6 +382,15 @@ System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
 	// ================================
 	// LOGIN METHOD
 	// ================================
+	 /**
+     * Logs a customer into the system by:
+     * <ol>
+     *     <li>Prompting for a customer ID and locating it in {@link #customerInfos}</li>
+     *     <li>Checking the password with up to 3 attempts</li>
+     *     <li>Verifying the stored security question and answer</li>
+     * </ol>
+     * If successful, a welcome message is displayed.
+     */
 	public static void logOn() {
     System.out.print("Enter customer ID: ");
     String id = input.nextLine();
@@ -378,6 +435,10 @@ System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
 	// ================================
 	// LOG OUT METHOD
 	// ================================
+	/**
+     * Logs out all accounts by clearing both {@link #customerInfos} and
+     * {@link #customerOrders}. This effectively resets the in-memory data.
+     */
 	public static void logOut() {
 		customerInfos.clear();
 		customerOrders.clear();
@@ -387,6 +448,21 @@ System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
 	// ================================
 	// MAIN MENU
 	// ================================
+	 /**
+     * Entry point of the application.
+     * Displays a text-based menu that allows the user to:
+     * <ul>
+     *     <li>Create an account</li>
+     *     <li>Log in</li>
+     *     <li>Log out</li>
+     *     <li>Select items</li>
+     *     <li>View orders</li>
+     *     <li>Make an order</li>
+     *     <li>Exit the program</li>
+     * </ul>
+     *
+     * @param args command line arguments (not used).
+     */
 	public static void main(String[] args) {
 		int selection;
 		
@@ -421,6 +497,12 @@ System.out.printf("%-12s | %-12s | %-10d | %-10s | %-8d | %-12.2f%n",
 // ================================
 // FIND CUSTOMER
 // ================================
+/**
+     * Finds the index of a customer in {@link #customerInfos} by customer ID.
+     *
+     * @param id the customer ID to search for.
+     * @return the index of the matching {@link CustomerInfo} or -1 if not found.
+     */
 static int findCustomerIndex(String id) {
 		for (int i = 0; i < customerInfos.size(); i++) {
 			if (customerInfos.get(i).getCustomerId().equals(id)) return i;
@@ -433,6 +515,11 @@ static int findCustomerIndex(String id) {
 // ======================
 // BLUEPRINT CLASS/ ARRAYS
 // ======================
+/**
+ * CustomerInfo stores basic account information for a single customer,
+ * including login credentials, contact details, credit card, and
+ * security question/answer.
+ */
 class CustomerInfo {
 	// ================================
 	// FIELDS
@@ -449,6 +536,17 @@ class CustomerInfo {
 	// ================================
 	// CONSTRUCTOR
 	// ================================
+	 /**
+     * Constructs a {@code CustomerInfo} with all fields initialized.
+     *
+     * @param customerId       the customer's ID.
+     * @param password         the customer's password.
+     * @param name             the customer's name.
+     * @param address          the customer's address.
+     * @param creditCard       the customer's credit card number.
+     * @param securityQuestion the security question.
+     * @param securityAnswer   the answer to the security question.
+     */
 	public CustomerInfo(String customerId, String password, String name, String address, String creditCard, String securityQuestion, String securityAnswer) {
         this.customerId = customerId;
         this.password = password;
@@ -498,6 +596,18 @@ class CustomerOrder {
 	// ================================
 	// CONSTRUCTOR
 	// ================================
+	 /**
+     * Constructs a {@code CustomerOrder} with all fields initialized.
+     *
+     * @param customerId   the customer ID associated with the order.
+     * @param milkQuantity number of milk units.
+     * @param breadQuantity number of bread units.
+     * @param eggsQuantity number of egg units.
+     * @param finalTotal   final total amount for the order.
+     * @param creditCard   credit card used for payment.
+     * @param authCode     authorization code for the payment.
+     * @param orderDate    date the order was placed.
+     */
 	public CustomerOrder(String customerId, int milkQuantity, int breadQuantity, int eggsQuantity, double finalTotal, String creditCard, int authCode, LocalDate orderDate) {
         this.milkQuantity = milkQuantity;
         this.breadQuantity = breadQuantity;
@@ -512,6 +622,10 @@ class CustomerOrder {
 	// ================================
 	// DEFAULT CONSTRUCTOR
 	// ================================
+	/**
+     * Default constructor for {@code CustomerOrder}.
+     * Creates an instance with default values (0 for quantities/total/authCode and null for strings/date).
+     */
 	public CustomerOrder() {}
 	
 	// ================================
