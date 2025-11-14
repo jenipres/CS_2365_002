@@ -14,8 +14,9 @@ public class TipCalculator extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        //-----------------------------
         // ----- Task #2 Controls -----
+        //-----------------------------
         Label chargeLabel = new Label("Restaurant Charge:");
         TextField chargeField = new TextField();
 
@@ -23,8 +24,9 @@ public class TipCalculator extends Application {
 
         Label amountLabel = new Label("Amount to Tip:");
         Label tipAmountLabel = new Label("");   // starts empty
-
+        //----------------------------------
         // ----- Task #4 Event Handler -----
+        //----------------------------------
         calcButton.setOnAction(e -> {
             try {
                 double charge = Double.parseDouble(chargeField.getText());
@@ -34,8 +36,9 @@ public class TipCalculator extends Application {
                 tipAmountLabel.setText("Invalid input");
             }
         });
-
+        //--------------------------------
         // ----- Task #3 VBox Layout -----
+        //--------------------------------
         VBox root = new VBox(10);
         root.setAlignment(Pos.CENTER);
         root.setPadding(new Insets(10));
@@ -47,8 +50,9 @@ public class TipCalculator extends Application {
                 amountLabel,
                 tipAmountLabel
         );
-
-        // ----- Scene -----
+        // ----------------
+        //----- Scene -----
+        //-----------------
         Scene scene = new Scene(root, 250, 250);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Tip Calculator");
